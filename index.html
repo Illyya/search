@@ -5,54 +5,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <title>Stroyportal</title>
 </head>
 <body>
+    <div id="app">
 
-    <header class="header">
-        <div class="header__row-1 row-1">
+        <header class="header">
+            <div class="header__row-1 row-1">
+                    <div class="container">
+                        <div class="row-1__body">
+                            <div class="row-1__location">
+                                <div class="sprite sprite-location"></div>
+                                <p>Волгоградская область</p>
+                            </div>
+                            <nav>
+                                <ul class="row-1__menu menu">
+                                    <li class="menu__li"><a href="#">Тендеры</a></li>
+                                    <li class="menu__li"><a href="#">База подрядчиков</a></li>
+                                    <li class="menu__li"><a href="#">Другие сервисы</a><div class="sprite sprite-down"></div></li>
+                                </ul>
+                            </nav>
+                        </div>                    
+                    </div>                
+            </div>
+            <div class="header__row-2 row-2">
                 <div class="container">
-                    <div class="row-1__body">
-                        <div class="row-1__location">
-                            <div class="sprite sprite-location"></div>
-                            <p>Волгоградская область</p>
+                    <div class="row-2__body">
+                        <div class="row-2__logo logo">
+                            <img src="img/logo.png" alt="Логотип Стройпортала">
                         </div>
-                        <nav>
-                            <ul class="row-1__menu menu">
-                                <li class="menu__li"><a href="#">Тендеры</a></li>
-                                <li class="menu__li"><a href="#">База подрядчиков</a></li>
-                                <li class="menu__li"><a href="#">Другие сервисы</a><div class="sprite sprite-down"></div></li>
-                            </ul>
-                        </nav>
-                    </div>                    
+                        <div class="row-2__catalog catalog">
+                            <div class="sprite sprite-menu"></div>
+                            <p>Каталог</p>
+                        </div>
+                        <div class="row-2__search search">
+                            <input @blur="onBlur=true" @focus="onFocus = true;onBlur = false;" v-model="autocomplete" @keyDown="keyDown"  type="text" name="autoomplete" placeholder="Хочу найти...">
+                            <div class="search__items">                              
+                              <div :class="currentFocus == index ? 'autocomplete-active' : ''" v-for="(i, index) in arr" v-if= "onFocus && i.substr(0, autocomplete.length).toUpperCase() == autocomplete.toUpperCase()" @click="autocomplete = i; onFocus = false;">
+                                <strong>{{i.substr(0, autocomplete.length)}}</strong>{{i.substr(autocomplete.length)}}
+                              </div>
+                            </div>                      
+                            <div class="sprite sprite-search"></div>
+                        </div>
+                        <div class="row-2__list list">
+                            <div class="sprite sprite-list"></div>
+                            <p>Список</p>
+                        </div>
+                        <div class="row-2__user user">
+                            <p>А</p>
+                        </div>
+                    </div>
                 </div>                
-        </div>
-        <div class="header__row-2 row-2">
-            <div class="container">
-                <div class="row-2__body">
-                    <div class="row-2__logo logo">
-                        <img src="img/logo.png" alt="Логотип Стройпортала">
-                    </div>
-                    <div class="row-2__catalog catalog">
-                        <div class="sprite sprite-menu"></div>
-                        <p>Каталог</p>
-                    </div>
-                    <div class="row-2__search search">
-                        <input type="search" name="search" id="search" placeholder="Хочу найти...">
-                        <div class="sprite sprite-search"></div>
-                    </div>
-                    <div class="row-2__list list">
-                        <div class="sprite sprite-list"></div>
-                        <p>Список</p>
-                    </div>
-                    <div class="row-2__user user">
-                        <p>А</p>
-                    </div>
-                </div>
-            </div>                
-        </div>
-    </header>
+            </div>
+        </header>    
     
+    </div>
+
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>
